@@ -44,6 +44,7 @@ export default function Auth() {
             password,
         })
         login()
+        
     } catch (error) {
         console.log(error)
     }
