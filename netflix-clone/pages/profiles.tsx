@@ -1,6 +1,8 @@
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { NextPageContext } from 'next'
 import { getSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 
 export async function getServerSideProps(context: NextPageContext) {
 	const session = await getSession(context)
@@ -20,7 +22,13 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 const Profiles = () => {
+	const router = useRouter()
 	const { data: user } = useCurrentUser()
+	
+	const selectedProfile = useCallback(() => {
+		router.push('/')
+		
+	}, [])
 
 	return (
 		<div className="flex items-center justify-center h-full">
@@ -29,7 +37,7 @@ const Profiles = () => {
 					Who is Watching?
 				</h1>
 				<div className="flex items-center justify-center gap-8 mt-10">
-					<div onClick={() => {}}>
+					<div onClick={() => {selectedProfile()}}>
 						<div className="group flex-row w-44 mx-auto">
 							<div
 								className="
