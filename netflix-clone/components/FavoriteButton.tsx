@@ -24,7 +24,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     if (isFavorite) {
       response = await axios.delete('/api/favorite', { data: { movieId } })
     } else {
-      response = await axios.post('/api/favorite', { dtaa: { movieId } })
+      response = await axios.post('/api/favorite', { movieId })
     }
     
     const updatedFavoriteIds = response?.data?.favoriteIds
@@ -32,7 +32,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       ...currentUser,
       favoriteIds: updatedFavoriteIds
     })
-    
+    mutateFavorites()
   }, [movieId, isFavorite, currentUser, mutate, mutateFavorites])
   
   const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus
